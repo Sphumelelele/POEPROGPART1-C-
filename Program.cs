@@ -29,7 +29,7 @@ namespace POEPROPART1
 
             Console.WriteLine($"\nWELCOME {name?.ToUpper()} TO OUR MENU HERE YOU CAN GET INFORMED ABOUT CYBERSECURITY\n");
             Console.WriteLine("\n")
-
+         
             bool keepShowMenu = true;
             while (keepShowMenu)
             {
@@ -105,7 +105,7 @@ Ways to Create a Strong Password:
     - Use a Password Manager – Stores and generates strong passwords.
     - Enable Multi-Factor Authentication (MFA) – Adds extra security.
 " }
-        };
+};
 
             ConsoleColor originalColor = Console.ForegroundColor;
             Console.ForegroundColor = ConsoleColor.Green;
@@ -122,9 +122,9 @@ Ways to Create a Strong Password:
             Console.WriteLine("════════════════════════════════════════════════════════════");
 
             Console.ForegroundColor = originalColor;
+           
 
-
-            Console.WriteLine("\n");
+             Console.WriteLine("\n");
             Console.WriteLine("TYPE THE NAME YOU WANT TO SEARCH AS IT IS ON THE MENU\n");
             string? search = Console.ReadLine()?.ToLower();
             Console.WriteLine("\n");
@@ -149,7 +149,7 @@ Ways to Create a Strong Password:
                         image.DisplayPicture($"{item.Key}.jpg");
 
                     Console.WriteLine("\n");
-                  
+
                     TrackingEmotion(search);
                     Console.WriteLine("\n");
                     TypeWriterEffect(item.Value, 30, ConsoleColor.White);
@@ -159,15 +159,17 @@ Ways to Create a Strong Password:
 
                     return true;
 
+                    }
                 }
-            }
 
+
+            Console.WriteLine("\nSEARCH INVALID - PLEASE CHOOSE FROM THE ITEMS ABOVE");
 
             Console.WriteLine("\nSEARCH INVALID - PLEASE CHOOSE FROM THE ITEMS BELOW OR YOU JUST SEARCHED RANDOM RESPONSES,EMOTION SENTIMENT");
             Console.WriteLine("\n");
-
+     
             return true;
-          
+        
         }
 
 
