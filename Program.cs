@@ -243,10 +243,10 @@ Malware that encrypts files and demands payment for decryption.
                 $"Think before you share no no no why think {name} while you can ask more questions if you curios.",
                 $"{name} I hope you filled with the most wonderfull information."
             };
-            ConsoleColor originalColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
+           
+
             Console.WriteLine(responses[index]);
-            Console.ForegroundColor = originalColor;
+           
             Console.WriteLine("\n");
             Console.WriteLine("\n");
         }
