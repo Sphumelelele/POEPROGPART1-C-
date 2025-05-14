@@ -28,7 +28,7 @@ namespace POEPROPART1
             }
 
             Console.WriteLine($"\nWELCOME {name?.ToUpper()} TO OUR MENU HERE YOU CAN GET INFORMED ABOUT CYBERSECURITY\n");
-            Console.WriteLine("\n")
+            Console.WriteLine("\n");
          
             bool keepShowMenu = true;
             while (keepShowMenu)
@@ -51,8 +51,9 @@ namespace POEPROPART1
         {
             { "phishing", @"
 A cyberattack where scammers trick people into revealing sensitive information (passwords, banking details, etc.)
-by pretending to be a trusted entity (e.g., a bank, company, or government).
-
+by pretending to be a trusted entity (e.g., a bank, company, or government). if you want more about phishing type more about phishing 
+"},
+  {"sensitive information", @"
 Ways to Prevent Phishing:
 
     - Verify Emails & Links – Check sender details and hover over links before clicking.
@@ -65,8 +66,9 @@ Ways to Prevent Phishing:
 " },
             { "malware", @"
 (Malicious software) is a program designed to harm, exploit, or disrupt devices, networks, or data.
-It includes viruses, worms, ransomware, spyware, and trojans.
-
+It includes viruses, worms, ransomware, spyware, and trojans.if you want more about malware type more about malware
+" },
+ { "protect from malicious software" ,@"
 Ways to Prevent Malware:
 
     - Install Antivirus & Keep It Updated – Detects and removes threats.
@@ -80,8 +82,9 @@ Ways to Prevent Malware:
             { "trojan horse", @"
 A Trojan Horse virus is a type of malware that disguises itself as a legitimate file or program to trick users
 into downloading and running it. Once activated, it can steal data, damage files, or allow hackers to control
-your system.
+your system." },
 
+ {"Avoid Suspicious download", @"
 Ways to Prevent Trojan Horse Viruses:
 
     - Avoid Suspicious Downloads – Only download software from trusted sources.
@@ -94,7 +97,9 @@ Ways to Prevent Trojan Horse Viruses:
 " },
             { "strong passwords", @"
 A secure and hard-to-crack password that protects accounts from hacking attempts.
+"},
 
+ {"vaild signin",@"
 Ways to Create a Strong Password:
 
     - Use 12–16+ Characters – Longer passwords are harder to crack.
@@ -104,7 +109,20 @@ Ways to Create a Strong Password:
     - Make It Unique for Each Account – Don’t reuse passwords.
     - Use a Password Manager – Stores and generates strong passwords.
     - Enable Multi-Factor Authentication (MFA) – Adds extra security.
-" }
+" },
+                    { "ransomware", @"
+Malware that encrypts files and demands payment for decryption.
+" },
+  {"tips on danagerous threats", @"
+**Prevention Tips:**
+✔ Maintain offline/cloud backups of critical data.  
+✔ Avoid clicking suspicious links in emails.  
+✔ Patch systems regularly to fix vulnerabilities.  
+✔ Restrict user permissions (least privilege principle).  
+✔ Use endpoint detection tools (e.g., CrowdStrike).  
+" },
+
+
 };
 
             ConsoleColor originalColor = Console.ForegroundColor;
@@ -115,10 +133,17 @@ Ways to Create a Strong Password:
             Console.WriteLine("                       SECURITY MENU                        ");
             Console.WriteLine("════════════════════════════════════════════════════════════");
             Console.WriteLine("  [1] PHISHING");
-            Console.WriteLine("  [2] MALWARE");
-            Console.WriteLine("  [3] TROJAN HORSE");
-            Console.WriteLine("  [4] STRONG PASSWORDS");
-            Console.WriteLine("  [0] EXIT PRESS THE X ON TOP RIGHT CORNER");
+            Console.WriteLine("  [2] protect sensitive information(random responses phishing tips)");
+            Console.WriteLine("  [3] MALWARE");
+            Console.WriteLine("  [4] protect from malicious software(random responses malware tips)");
+            Console.WriteLine("  [5] TROJAN HORSE");
+            Console.WriteLine("  [6] Avoid Suspicious download(random  responses trojan horse tip)");
+            Console.WriteLine("  [7] STRONG PASSWORDS");
+            Console.WriteLine("  [8] vaild signin (random  responses strong password tips)");
+            Console.WriteLine("  [9]  RANSOMWARE");
+            Console.WriteLine("  [10] tips on danagerous threats (random  responses ransomware tip)");
+            Console.WriteLine("  [11] EXIT PRESS THE X ON TOP RIGHT CORNER");
+            Console.WriteLine("  [12] sentiment detection i used worried, furious,curious,worried,happy,sad ");
             Console.WriteLine("════════════════════════════════════════════════════════════");
 
             Console.ForegroundColor = originalColor;
@@ -126,46 +151,53 @@ Ways to Create a Strong Password:
 
              Console.WriteLine("\n");
             Console.WriteLine("TYPE THE NAME YOU WANT TO SEARCH AS IT IS ON THE MENU\n");
-            string? search = Console.ReadLine()?.ToLower();
-            Console.WriteLine("\n");
-            Responses(search);
-            TrackingEmotion(search);
+            string? search = null;
             List<string> history = new List<string>();
+
+            var inputTimer = new System.Timers.Timer(45000); // 45 seconds
+            inputTimer.Elapsed += (sender, e) =>
+            {
+                if (string.IsNullOrEmpty(search))
+                {
+                    Console.WriteLine("\nAre you confused? Type your question and press Enter.");
+                }
+            
+            };
+            inputTimer.AutoReset = false; 
+            inputTimer.Start();
+
+          
+            search = Console.ReadLine()?.ToLower();
+            inputTimer.Stop(); 
+
+            Console.WriteLine("\n");
+
+            TrackingEmotion(search);
             history.Add(search);
             foreach (var item in list)
             {
-                // Check if the search term matches the key (case-insensitive)
-                if (search.Contains(item.Key.ToLower()) && search != null )
+               
+                if (search.Contains(item.Key.ToLower()) && search != null)
                 {
-                
-
-
                     if (history.Contains(search))
                     {
-                        Console.WriteLine($"i remember you have ask about {search} before thank you for being curious");
+                        Console.WriteLine($"I remember you have asked about {search} before. Thank you for being curious!");
                     }
-                  
 
-                        image.DisplayPicture($"{item.Key}.jpg");
-
+                    image.DisplayPicture($"{item.Key}.jpg");
                     Console.WriteLine("\n");
-
                     TrackingEmotion(search);
                     Console.WriteLine("\n");
                     TypeWriterEffect(item.Value, 30, ConsoleColor.White);
                     Console.WriteLine("\n");
 
-                
-
                     return true;
-
-                    }
                 }
+            }
 
 
-            Console.WriteLine("\nSEARCH INVALID - PLEASE CHOOSE FROM THE ITEMS ABOVE");
 
-            Console.WriteLine("\nSEARCH INVALID - PLEASE CHOOSE FROM THE ITEMS BELOW OR YOU JUST SEARCHED RANDOM RESPONSES,EMOTION SENTIMENT");
+            Console.WriteLine("\nSEARCH INVALID - PLEASE CHOOSE FROM THE ITEMS BELOW ");
             Console.WriteLine("\n");
      
             return true;
@@ -195,99 +227,6 @@ Ways to Create a Strong Password:
             }
             Console.ForegroundColor = originalColor;
         }
-
-
-
-
-
-
-
-        public static  void Responses(string search)
-        {
-            Dictionary<string, string> cybersecurityTips = new Dictionary<string, string>
-{
-   
-
-    // Ransomware
-    { "ransomware", @"
-Malware that encrypts files and demands payment for decryption.
-
-**Prevention Tips:**
-✔ Maintain offline/cloud backups of critical data.  
-✔ Avoid clicking suspicious links in emails.  
-✔ Patch systems regularly to fix vulnerabilities.  
-✔ Restrict user permissions (least privilege principle).  
-✔ Use endpoint detection tools (e.g., CrowdStrike).  
-" },
-
-    // Social Engineering
-    { "social_engineering ", @"
-Psychological manipulation to trick users into revealing sensitive data.
-
-**Prevention Tips:**
-✔ Verify unusual requests via a second channel (e.g., phone call).  
-✔ Limit personal info shared on social media.  
-✔ Train staff to recognize scams (e.g., fake IT support calls).  
-✔ Use encryption for sensitive communications.  
-✔ Implement strict access controls.  
-" },
-
-    // Man-in-the-Middle (MITM) Attacks
-    { "mitm ", @"
-When attackers intercept communication between two parties.
-
-**Prevention Tips:**
-✔ Use VPNs on public Wi-Fi.  
-✔ Ensure websites use HTTPS (look for 🔒).  
-✔ Avoid logging into accounts on shared devices.  
-✔ Enable certificate pinning for critical apps.  
-✔ Monitor network traffic for anomalies.  
-" },
-
-    // Zero-Day Exploits
-    { "zero_day", @"
-Attacks targeting unknown vulnerabilities before a patch exists.
-
-**Prevention Tips:**
-✔ Deploy intrusion detection systems (IDS).  
-✔ Segment networks to limit breach impact.  
-✔ Use application whitelisting.  
-✔ Keep systems updated automatically.  
-✔ Educate users on suspicious behavior.  
-" },
-
-    // Insider Threats
-    { "insider_threats", @"
-Risks posed by employees/contractors misusing access.
-
-**Prevention Tips:**
-✔ Implement role-based access controls (RBAC).  
-✔ Monitor user activity logs.  
-✔ Conduct background checks for sensitive roles.  
-✔ Encourage anonymous reporting of suspicious behavior.  
-✔ Revoke access immediately after employee exit.  
-" }
-};
-            foreach (var response in cybersecurityTips)
-            {
-                // Check if the search term matches the key (case-insensitive)
-                if (search.Contains(response.Key) && search != null)
-                {
-
-
-                    Console.WriteLine("\n");
-                    TypeWriterEffect(response.Value, 30, ConsoleColor.White);
-                    Console.WriteLine("\n");
-
-               
-
-                    return ;
-
-                }
-            }
-        }
-
-
 
 
 
