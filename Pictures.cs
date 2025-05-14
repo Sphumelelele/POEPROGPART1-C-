@@ -16,7 +16,7 @@ namespace POEPROPART1
             Console.ForegroundColor = ConsoleColor.DarkYellow;
             if (!File.Exists(imagePath))
             {
-                Console.WriteLine("Image file not found: " + imagePath);
+                Console.WriteLine("wonderfull question");
                 return;
             }
             // Load the image
